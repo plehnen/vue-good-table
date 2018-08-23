@@ -34,23 +34,23 @@
                 </div>
               </td>
             </tr>
-          </thead>
-
-          <tbody>
             <tr>
-              <td v-if="lineNumbers" class="line-numbers"></td>
-              <td v-for="(column, index) in columns"
-                :key="index"
-                @click="sort(index)"
-                :class="getHeaderClasses(column, index)"
-                :style="{width: column.width ? column.width : 'auto'}"
-                v-if="!column.hidden">
+              <th v-if="lineNumbers" class="line-numbers"></th>
+              <th v-for="(column, index) in columns"
+                  :key="index"
+                  @click="sort(index)"
+                  :class="getHeaderClasses(column, index)"
+                  :style="{width: column.width ? column.width : 'auto'}"
+                  v-if="!column.hidden">
                 <slot name="table-column" :column="column">
                   <span>{{column.label}}</span>
                 </slot>
-              </td>
+              </th>
               <slot name="thead-tr"></slot>
             </tr>
+          </thead>
+
+          <tbody>
             <tr v-if="hasFilterRow">
               <td v-if="lineNumbers"></td>
               <td v-for="(column, index) in columns"
@@ -68,6 +68,7 @@
                   <!-- options are a list of primitives -->
                   <select v-if="column.filterDropdown && typeof(column.filterOptions[0]) !== 'object'"
                     class=""
+                    :aria-label="column.label"
                     :value="columnFilters[column.field]"
                     v-on:change="updateFilters(column, $event.target.value)">
                       <option value="" key="-1">{{ getPlaceholder(column) }}</option>
@@ -82,6 +83,7 @@
                   <!-- options are a list of objects with text and value -->
                   <select v-if="column.filterDropdown && typeof(column.filterOptions[0]) === 'object'"
                     class=""
+                    :aria-label="column.label"
                     :value="columnFilters[column.field]"
                     v-on:change="updateFilters(column, $event.target.value)">
                     <option value="" key="-1">{{ getPlaceholder(column) }}</option>
