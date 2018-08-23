@@ -34,9 +34,12 @@
                 </div>
               </td>
             </tr>
+          </thead>
+
+          <tbody>
             <tr>
-              <th v-if="lineNumbers" class="line-numbers"></th>
-              <th v-for="(column, index) in columns"
+              <td v-if="lineNumbers" class="line-numbers"></td>
+              <td v-for="(column, index) in columns"
                 :key="index"
                 @click="sort(index)"
                 :class="getHeaderClasses(column, index)"
@@ -45,12 +48,12 @@
                 <slot name="table-column" :column="column">
                   <span>{{column.label}}</span>
                 </slot>
-              </th>
+              </td>
               <slot name="thead-tr"></slot>
             </tr>
             <tr v-if="hasFilterRow">
-              <th v-if="lineNumbers"></th>
-              <th v-for="(column, index) in columns"
+              <td v-if="lineNumbers"></td>
+              <td v-for="(column, index) in columns"
                 :key="index"
                 v-if="!column.hidden">
                 <div v-if="column.filterable"
@@ -88,17 +91,15 @@
                       :value="option.value">{{ option.text }}</option>
                   </select>
                 </div>
-              </th>
+              </td>
             </tr>
-          </thead>
 
-          <tbody>
             <tr
               v-for="(row, index) in paginated"
               :key="index"
               :class="getRowStyleClass(row)"
               @click="click(row, index)">
-              <th v-if="lineNumbers" class="line-numbers">{{ getCurrentIndex(index) }}</th>
+              <td v-if="lineNumbers" class="line-numbers">{{ getCurrentIndex(index) }}</td>
               <slot name="table-row-before" :row="row" :index="index"></slot>
               <slot name="table-row" :row="row" :formattedRow="formattedRow(row)" :index="index">
                 <td

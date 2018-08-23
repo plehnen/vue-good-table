@@ -1,5 +1,5 @@
 /**
- * vue-good-table v1.20.0
+ * vue-good-table v1.20.101
  * https://github.com/xaksis/vue-good-table
  * Released under the MIT License.
  */
@@ -559,7 +559,7 @@ function startOfISOWeek (dirtyDate, dirtyOptions) {
 /* 4 */
 /***/ (function(module, exports) {
 
-var core = module.exports = { version: '2.5.3' };
+var core = module.exports = { version: '2.5.1' };
 if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
 
 
@@ -3495,7 +3495,7 @@ module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCE
   var VALUES_BUG = false;
   var proto = Base.prototype;
   var $native = proto[ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT];
-  var $default = (!BUGGY && $native) || getMethod(DEFAULT);
+  var $default = $native || getMethod(DEFAULT);
   var $entries = DEFAULT ? !DEF_VALUES ? $default : getMethod('entries') : undefined;
   var $anyNative = NAME == 'Array' ? proto.entries || $native : $native;
   var methods, key, IteratorPrototype;
@@ -5524,17 +5524,13 @@ var singletonElement = null
 var singletonCounter = 0
 var isProduction = false
 var noop = function () {}
-var options = null
-var ssrIdKey = 'data-vue-ssr-id'
 
 // Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
 // tags it will allow on a page
 var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
 
-module.exports = function (parentId, list, _isProduction, _options) {
+module.exports = function (parentId, list, _isProduction) {
   isProduction = _isProduction
-
-  options = _options || {}
 
   var styles = listToStyles(parentId, list)
   addStylesToDom(styles)
@@ -5599,7 +5595,7 @@ function createStyleElement () {
 
 function addStyle (obj /* StyleObjectPart */) {
   var update, remove
-  var styleElement = document.querySelector('style[' + ssrIdKey + '~="' + obj.id + '"]')
+  var styleElement = document.querySelector('style[data-vue-ssr-id~="' + obj.id + '"]')
 
   if (styleElement) {
     if (isProduction) {
@@ -5680,9 +5676,6 @@ function applyToTag (styleElement, obj) {
 
   if (media) {
     styleElement.setAttribute('media', media)
-  }
-  if (options.ssrId) {
-    styleElement.setAttribute(ssrIdKey, obj.id)
   }
 
   if (sourceMap) {
@@ -5800,7 +5793,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       return first + ' - ' + last + ' ' + this.ofText + ' ' + this.total;
     },
     nextIsPossible: function nextIsPossible() {
-      return this.total > this.currentPerPage * this.currentPage;
+      return this.currentPerPage === -1 ? false : this.total > this.currentPerPage * this.currentPage;
     },
     prevIsPossible: function prevIsPossible() {
       return this.currentPage > 1;
@@ -7158,7 +7151,7 @@ exports = module.exports = __webpack_require__(51)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Utility styles\n************************************************/\n.right-align[data-v-a440e668]{\n  text-align: right;\n}\n.left-align[data-v-a440e668]{\n  text-align: left;\n}\n.center-align[data-v-a440e668]{\n  text-align: center;\n}\n.pull-left[data-v-a440e668]{\n  float:  left !important;\n}\n.pull-right[data-v-a440e668]{\n  float:  right !important;\n}\n.clearfix[data-v-a440e668]::after {\n  display: block;\n  content: \"\";\n  clear: both;\n}\n\n/* Table footer specific styles\n************************************************/\n.table-footer[data-v-a440e668]{\n  /* background-color: rgba(35,41,53, 0.03); */\n  background-color: rgba(35,41,53,0.05);\n  border: 1px solid #DDD;\n  margin:  0;\n  padding:  1rem;\n  font-size: 14px;\n  color:  rgba(0, 0, 0, 0.44);\n}\n.table-footer>div[data-v-a440e668]{\n  display: inline-block;\n}\n.pagination-controls>*[data-v-a440e668]{\n  display: inline-block;\n}\n.pagination-controls a[data-v-a440e668]{\n  text-decoration: none;\n  color: rgba(0, 0, 0, 0.66);\n  font-size: 14px;\n  font-weight: 600;\n  opacity: 0.8;\n}\n.pagination-controls a.disabled[data-v-a440e668],\n.pagination-controls a.disabled[data-v-a440e668]:hover {\n  cursor: not-allowed;\n  opacity: 0.4;\n}\n.pagination-controls a[data-v-a440e668]:hover{\n  opacity: 1;\n}\n.pagination-controls a span[data-v-a440e668]{\n  display: inline-block;\n  vertical-align: middle;\n}\n.pagination-controls .info[data-v-a440e668]{\n  margin:  0px 15px;\n  font-size: 13px;\n  font-weight: bold;\n  color:  rgba(0, 0, 0, 0.40);\n}\n.pagination-controls a .chevron[data-v-a440e668]{\n  width:  24px;\n  height:  24px;\n  border-radius: 15%;\n  /* border:  1px solid rgba(35,41,53,0.2);\n  background-color: #fff; */\n  position:  relative;\n  margin:  0px 8px;\n}\n.pagination-controls .chevron[data-v-a440e668]::after{\n  content:  '';\n  position:  absolute;\n  display:  block;\n  left:  50%;\n  top:  50%;\n  margin-top:  -6px;\n  border-top: 6px solid transparent;\n  border-bottom: 6px solid transparent;\n}\n.pagination-controls .chevron.left[data-v-a440e668]::after{\n  border-right:  6px solid rgba(0, 0, 0, 0.66);\n  margin-left:  -3px;\n}\n.pagination-controls .chevron.right[data-v-a440e668]::after{\n  border-left:  6px solid rgba(0, 0, 0, 0.66);\n  margin-left:  -3px;\n}\n.table-footer select[data-v-a440e668] {\n  display: inline-block;\n  background-color: transparent;\n  width: auto;\n  padding: 0;\n  border: 0;\n  border-radius: 0;\n  height: auto;\n  font-size: 14px;\n  margin-left: 8px;\n  color:  rgba(0, 0, 0, 0.55);\n  font-weight: bold;\n}\n.table-footer .perpage-count[data-v-a440e668]{\n  color:  rgba(0, 0, 0, 0.55);\n  font-weight: bold;\n}\n@media only screen and (max-width: 750px) {\n  /* on small screens hide the info */\n.pagination-controls .info[data-v-a440e668]{\n    display:  none;\n}\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Utility styles\n************************************************/\n.right-align[data-v-a440e668]{\n  text-align: right;\n}\n.left-align[data-v-a440e668]{\n  text-align: left;\n}\n.center-align[data-v-a440e668]{\n  text-align: center;\n}\n.pull-left[data-v-a440e668]{\n  float:  left !important;\n}\n.pull-right[data-v-a440e668]{\n  float:  right !important;\n}\n.clearfix[data-v-a440e668]::after {\n  display: block;\n  content: \"\";\n  clear: both;\n}\n\n/* Table footer specific styles\n************************************************/\n.table-footer[data-v-a440e668]{\n  /* background-color: rgba(35,41,53, 0.03); */\n  background-color: rgba(35,41,53,0.05);\n  border: 1px solid #DDD;\n  margin:  0;\n  padding:  1rem;\n  font-size: 14px;\n  color:  rgba(0, 0, 0, 0.44);\n}\n.table-footer>div[data-v-a440e668]{\n  display: inline-block;\n}\n.pagination-controls>*[data-v-a440e668]{\n  display: inline-block;\n}\n.pagination-controls a[data-v-a440e668]{\n  text-decoration: none;\n  color: rgba(0, 0, 0, 0.66);\n  font-size: 14px;\n  font-weight: 600;\n  opacity: 0.8;\n}\n.pagination-controls a.disabled[data-v-a440e668],\n.pagination-controls a.disabled[data-v-a440e668]:hover {\n  cursor: not-allowed;\n  opacity: 0.4;\n}\n.pagination-controls a[data-v-a440e668]:hover{\n  opacity: 1;\n}\n.pagination-controls a span[data-v-a440e668]{\n  display: inline-block;\n  vertical-align: middle;\n}\n.pagination-controls .info[data-v-a440e668]{\n  margin:  0px 15px;\n  font-size: 13px;\n  font-weight: bold;\n  color:  rgba(0, 0, 0, 0.40);\n}\n.pagination-controls a .chevron[data-v-a440e668]{\n  width:  24px;\n  height:  24px;\n  border-radius: 15%;\n  /* border:  1px solid rgba(35,41,53,0.2);\n  background-color: #fff; */\n  position:  relative;\n  margin:  0px 8px;\n}\n.pagination-controls .chevron[data-v-a440e668]::after{\n  content:  '';\n  position:  absolute;\n  display:  block;\n  left:  50%;\n  top:  50%;\n  margin-top:  -6px;\n  border-top: 6px solid transparent;\n  border-bottom: 6px solid transparent;\n}\n.pagination-controls .chevron.left[data-v-a440e668]::after{\n  border-right:  6px solid rgba(0, 0, 0, 0.66);\n  margin-left:  -3px;\n}\n.pagination-controls .chevron.right[data-v-a440e668]::after{\n  border-left:  6px solid rgba(0, 0, 0, 0.66);\n  margin-left:  -3px;\n}\n.table-footer select[data-v-a440e668] {\n  display: inline-block;\n  background-color: transparent;\n  width: auto;\n  padding: 0;\n  border: 0;\n  border-radius: 0;\n  height: auto;\n  font-size: 14px;\n  margin-left: 8px;\n  color:  rgba(0, 0, 0, 0.55);\n  font-weight: bold;\n}\n.table-footer .perpage-count[data-v-a440e668]{\n  color:  rgba(0, 0, 0, 0.55);\n  font-weight: bold;\n}\n@media only screen and (max-width: 750px) {\n  /* on small screens hide the info */\n.pagination-controls .info[data-v-a440e668]{\n    display:  none;\n}\n}\n", ""]);
 
 // exports
 
@@ -7172,7 +7165,7 @@ exports = module.exports = __webpack_require__(51)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Utility styles\n************************************************/\n.right-align[data-v-d89f00e8]{\n  text-align: right;\n}\n.left-align[data-v-d89f00e8]{\n  text-align: left;\n}\n.center-align[data-v-d89f00e8]{\n  text-align: center;\n}\n.pull-left[data-v-d89f00e8]{\n  float:  left !important;\n}\n.pull-right[data-v-d89f00e8]{\n  float:  right !important;\n}\n.clearfix[data-v-d89f00e8]::after {\n  display: block;\n  content: \"\";\n  clear: both;\n}\n\n/* Table specific styles\n************************************************/\ntable[data-v-d89f00e8]{\n    border-collapse: collapse;\n    background-color: transparent;\n    margin-bottom:  0px;\n}\n.table[data-v-d89f00e8]{\n    width: 100%;\n    max-width: 100%;\n    table-layout: auto;\n}\n.table.table-striped tbody tr[data-v-d89f00e8]:nth-of-type(odd) {\n      background-color: rgba(35,41,53,.05);\n}\n.table.table-bordered td[data-v-d89f00e8], .table-bordered th[data-v-d89f00e8] {\n      border: 1px solid #DDD;\n}\n.table td[data-v-d89f00e8], .table th[data-v-d89f00e8]:not(.line-numbers) {\n    padding: .75rem 1.5rem .75rem .75rem;\n    vertical-align: top;\n    border-top: 1px solid #ddd;\n}\n.rtl .table td[data-v-d89f00e8], .rtl .table th[data-v-d89f00e8]:not(.line-numbers) {\n    padding: .75rem .75rem .75rem 1.5rem;\n}\n.table.condensed td[data-v-d89f00e8], .table.condensed th[data-v-d89f00e8] {\n    padding: .4rem .4rem .4rem .4rem;\n}\n.table thead th[data-v-d89f00e8], .table.condensed thead th[data-v-d89f00e8] {\n    vertical-align: bottom;\n    border-bottom:  2px solid #ddd;\n    padding-right: 1.5rem;\n    background-color: rgba(35,41,53,0.03);\n}\n.rtl .table thead th[data-v-d89f00e8], .rtl .table.condensed thead th[data-v-d89f00e8] {\n    padding-left:  1.5rem;\n    padding-right:  .75rem;\n}\ntr.clickable[data-v-d89f00e8] {\n    cursor: pointer;\n}\n.table input[type=\"text\"][data-v-d89f00e8], .table select[data-v-d89f00e8]{\n    box-sizing: border-box;\n    display: block;\n    width: calc(100%);\n    height: 34px;\n    padding: 6px 12px;\n    font-size: 14px;\n    line-height: 1.42857143;\n    color: #555;\n    background-color: #fff;\n    background-image: none;\n    border: 1px solid #ccc;\n    border-radius: 4px;\n    -webkit-box-shadow: inset 0 1px 1px rgba(35,41,53,.075);\n    box-shadow: inset 0 1px 1px rgba(35,41,53,.075);\n    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;\n    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;\n    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;\n}\ntable th.sorting-asc[data-v-d89f00e8],\n  table th.sorting-desc[data-v-d89f00e8] {\n    color: rgba(0, 0, 0, 0.66);\n    position: relative;\n}\ntable th.sorting[data-v-d89f00e8]:after,\n  table th.sorting-asc[data-v-d89f00e8]:after  {\n    font-family: 'Material Icons';\n    position:  absolute;\n    height:  0px;\n    width:  0px;\n    content: '';\n    display: none;\n    border-left: 6px solid transparent;\n    border-right: 6px solid transparent;\n    border-bottom: 6px solid rgba(0, 0, 0, 0.66);\n    margin-top:  6px;\n    margin-left:  5px;\n}\n.rtl table th.sorting[data-v-d89f00e8]:after,\n  .rtl table th.sorting-asc[data-v-d89f00e8]:after{\n    margin-right:  5px;\n    margin-left:  0px;\n}\ntable th.sorting[data-v-d89f00e8]:hover:after{\n    display: inline-block;\n    border-bottom-color: rgba(35,41,53,0.25);\n}\ntable th.sorting-asc[data-v-d89f00e8]:after,\n  table th.sorting-desc[data-v-d89f00e8]:after {\n    display: inline-block;\n}\ntable th.sorting-desc[data-v-d89f00e8]:after {\n    border-top:  6px solid rgba(0, 0, 0, 0.66);\n    border-left: 6px solid transparent;\n    border-right: 6px solid transparent;\n    border-bottom: none;\n    margin-top:  8px;\n}\n.responsive[data-v-d89f00e8] {\n  width: 100%;\n  overflow-x: scroll;\n}\n\n/* Table header specific styles\n************************************************/\n.table-header[data-v-d89f00e8]{\n  padding:  .75rem;\n}\n.table-header .table-title[data-v-d89f00e8]{\n  margin:  0px;\n  font-size: 18px;\n}\n\n  /* Global Search\n  **********************************************/\n.global-search[data-v-d89f00e8]{\n    position:  relative;\n    padding-left: 40px;\n}\n.global-search-icon[data-v-d89f00e8]{\n    position:  absolute;\n    left:  0px;\n    max-width:  32px;\n}\n.global-search-icon > img[data-v-d89f00e8]{\n    max-width:  100%;\n    margin-top:  8px;\n    opacity: 0.5;\n}\ntable .global-search-input[data-v-d89f00e8]{\n   width:  calc(100% - 30px);\n}\n\n  /* Line numbers\n  **********************************************/\ntable th.line-numbers[data-v-d89f00e8], .table.condensed th.line-numbers[data-v-d89f00e8]{\n    background-color: rgba(35,41,53,0.05);\n    padding-left:  3px;\n    padding-right:  3px;\n    word-wrap: break-word;\n    width: 45px;\n    text-align: center;\n}\n.good-table.rtl[data-v-d89f00e8]{\n    direction: rtl;\n}\n.text-disabled[data-v-d89f00e8]{\n    color:  #aaa;\n}\n\n/* magnifying glass css */\n.magnifying-glass[data-v-d89f00e8]\n{\n  margin-top: 3px;\n  display: block;\n  width: 18px;\n  height: 18px;\n  border: 3px solid #ccc;\n  position: relative;\n  border-radius: 50%;\n}\n.magnifying-glass[data-v-d89f00e8]::before\n{\n  content: \"\";\n  display: block;\n  position: absolute;\n  right: -10px;\n  bottom: -6px;\n  background: #ccc;\n  width: 10px;\n  height: 5px;\n  border-radius: 2px;\n  transform: rotate(45deg);\n  -webkit-transform: rotate(45deg);\n    -moz-transform: rotate(45deg);\n      -ms-transform: rotate(45deg);\n      -o-transform: rotate(45deg);\n}\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Utility styles\n************************************************/\n.right-align[data-v-d89f00e8]{\n  text-align: right;\n}\n.left-align[data-v-d89f00e8]{\n  text-align: left;\n}\n.center-align[data-v-d89f00e8]{\n  text-align: center;\n}\n.pull-left[data-v-d89f00e8]{\n  float:  left !important;\n}\n.pull-right[data-v-d89f00e8]{\n  float:  right !important;\n}\n.clearfix[data-v-d89f00e8]::after {\n  display: block;\n  content: \"\";\n  clear: both;\n}\n\n/* Table specific styles\n************************************************/\ntable[data-v-d89f00e8]{\n    border-collapse: collapse;\n    background-color: transparent;\n    margin-bottom:  0px;\n}\n.table[data-v-d89f00e8]{\n    width: 100%;\n    max-width: 100%;\n    table-layout: auto;\n}\n.table.table-striped tbody tr[data-v-d89f00e8]:nth-of-type(odd) {\n      background-color: rgba(35,41,53,.05);\n}\n.table.table-bordered td[data-v-d89f00e8], .table-bordered th[data-v-d89f00e8] {\n      border: 1px solid #DDD;\n}\n.table td[data-v-d89f00e8], .table th[data-v-d89f00e8]:not(.line-numbers) {\n    padding: .75rem 1.5rem .75rem .75rem;\n    vertical-align: top;\n    border-top: 1px solid #ddd;\n}\n.rtl .table td[data-v-d89f00e8], .rtl .table th[data-v-d89f00e8]:not(.line-numbers) {\n    padding: .75rem .75rem .75rem 1.5rem;\n}\n.table.condensed td[data-v-d89f00e8], .table.condensed th[data-v-d89f00e8] {\n    padding: .4rem .4rem .4rem .4rem;\n}\n.table thead th[data-v-d89f00e8], .table.condensed thead th[data-v-d89f00e8] {\n    vertical-align: bottom;\n    border-bottom:  2px solid #ddd;\n    padding-right: 1.5rem;\n    background-color: rgba(35,41,53,0.03);\n}\n.rtl .table thead th[data-v-d89f00e8], .rtl .table.condensed thead th[data-v-d89f00e8] {\n    padding-left:  1.5rem;\n    padding-right:  .75rem;\n}\ntr.clickable[data-v-d89f00e8] {\n    cursor: pointer;\n}\n.table input[type=\"text\"][data-v-d89f00e8], .table select[data-v-d89f00e8]{\n    box-sizing: border-box;\n    display: block;\n    width: calc(100%);\n    height: 34px;\n    padding: 6px 12px;\n    font-size: 14px;\n    line-height: 1.42857143;\n    color: #555;\n    background-color: #fff;\n    background-image: none;\n    border: 1px solid #ccc;\n    border-radius: 4px;\n    -webkit-box-shadow: inset 0 1px 1px rgba(35,41,53,.075);\n    box-shadow: inset 0 1px 1px rgba(35,41,53,.075);\n    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;\n    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;\n    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;\n}\ntable th.sorting-asc[data-v-d89f00e8],\n  table th.sorting-desc[data-v-d89f00e8] {\n    color: rgba(0, 0, 0, 0.66);\n    position: relative;\n}\ntable th.sorting[data-v-d89f00e8]:after,\n  table th.sorting-asc[data-v-d89f00e8]:after  {\n    font-family: 'Material Icons';\n    position:  absolute;\n    height:  0px;\n    width:  0px;\n    content: '';\n    display: none;\n    border-left: 6px solid transparent;\n    border-right: 6px solid transparent;\n    border-bottom: 6px solid rgba(0, 0, 0, 0.66);\n    margin-top:  6px;\n    margin-left:  5px;\n}\n.rtl table th.sorting[data-v-d89f00e8]:after,\n  .rtl table th.sorting-asc[data-v-d89f00e8]:after{\n    margin-right:  5px;\n    margin-left:  0px;\n}\ntable th.sorting[data-v-d89f00e8]:hover:after{\n    display: inline-block;\n    border-bottom-color: rgba(35,41,53,0.25);\n}\ntable th.sorting-asc[data-v-d89f00e8]:after,\n  table th.sorting-desc[data-v-d89f00e8]:after {\n    display: inline-block;\n}\ntable th.sorting-desc[data-v-d89f00e8]:after {\n    border-top:  6px solid rgba(0, 0, 0, 0.66);\n    border-left: 6px solid transparent;\n    border-right: 6px solid transparent;\n    border-bottom: none;\n    margin-top:  8px;\n}\n.responsive[data-v-d89f00e8] {\n  width: 100%;\n  overflow-x: scroll;\n}\n\n/* Table header specific styles\n************************************************/\n.table-header[data-v-d89f00e8]{\n  padding:  .75rem;\n}\n.table-header .table-title[data-v-d89f00e8]{\n  margin:  0px;\n  font-size: 18px;\n}\n\n  /* Global Search\n  **********************************************/\n.global-search[data-v-d89f00e8]{\n    position:  relative;\n    padding-left: 40px;\n}\n.global-search-icon[data-v-d89f00e8]{\n    position:  absolute;\n    left:  0px;\n    max-width:  32px;\n}\n.global-search-icon > img[data-v-d89f00e8]{\n    max-width:  100%;\n    margin-top:  8px;\n    opacity: 0.5;\n}\ntable .global-search-input[data-v-d89f00e8]{\n   width:  calc(100% - 30px);\n}\n\n  /* Line numbers\n  **********************************************/\ntable th.line-numbers[data-v-d89f00e8], .table.condensed th.line-numbers[data-v-d89f00e8]{\n    background-color: rgba(35,41,53,0.05);\n    padding-left:  3px;\n    padding-right:  3px;\n    word-wrap: break-word;\n    width: 45px;\n    text-align: center;\n}\n.good-table.rtl[data-v-d89f00e8]{\n    direction: rtl;\n}\n.text-disabled[data-v-d89f00e8]{\n    color:  #aaa;\n}\n\n/* magnifying glass css */\n.magnifying-glass[data-v-d89f00e8]\n{\n  margin-top: 3px;\n  display: block;\n  width: 18px;\n  height: 18px;\n  border: 3px solid #ccc;\n  position: relative;\n  border-radius: 50%;\n}\n.magnifying-glass[data-v-d89f00e8]::before\n{\n  content: \"\";\n  display: block;\n  position: absolute;\n  right: -10px;\n  bottom: -6px;\n  background: #ccc;\n  width: 10px;\n  height: 5px;\n  border-radius: 2px;\n  transform: rotate(45deg);\n  -webkit-transform: rotate(45deg);\n    -moz-transform: rotate(45deg);\n      -ms-transform: rotate(45deg);\n      -o-transform: rotate(45deg);\n}\n\n", ""]);
 
 // exports
 
@@ -14675,7 +14668,7 @@ var Component = __webpack_require__(84)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/codeoasis/forks/vue-good-table/src/components/Pagination.vue"
+Component.options.__file = "/mnt/d/plehnen/Projects/vue-good-table/src/components/Pagination.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Pagination.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -14719,7 +14712,7 @@ var Component = __webpack_require__(84)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "/home/codeoasis/forks/vue-good-table/src/components/Table.vue"
+Component.options.__file = "/mnt/d/plehnen/Projects/vue-good-table/src/components/Table.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Table.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -14777,6 +14770,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     attrs: {
       "href": "javascript:undefined",
+      "aria-disabled": !_vm.prevIsPossible,
       "tabindex": "0"
     },
     on: {
@@ -14800,6 +14794,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     attrs: {
       "href": "javascript:undefined",
+      "aria-disabled": !_vm.nextIsPossible,
       "tabindex": "0"
     },
     on: {
@@ -14869,7 +14864,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('div', {
     staticClass: "global-search"
-  }, [_vm._m(0), _vm._v(" "), _c('input', {
+  }, [_vm._m(0, false, false), _vm._v(" "), _c('input', {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -14894,10 +14889,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.globalSearchTerm = $event.target.value
       }
     }
-  })])])]) : _vm._e(), _vm._v(" "), _c('tr', [(_vm.lineNumbers) ? _c('th', {
+  })])])]) : _vm._e()]), _vm._v(" "), _c('tbody', [_c('tr', [(_vm.lineNumbers) ? _c('td', {
     staticClass: "line-numbers"
   }) : _vm._e(), _vm._v(" "), _vm._l((_vm.columns), function(column, index) {
-    return (!column.hidden) ? _c('th', {
+    return (!column.hidden) ? _c('td', {
       key: index,
       class: _vm.getHeaderClasses(column, index),
       style: ({
@@ -14911,8 +14906,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_vm._t("table-column", [_c('span', [_vm._v(_vm._s(column.label))])], {
       column: column
     })], 2) : _vm._e()
-  }), _vm._v(" "), _vm._t("thead-tr")], 2), _vm._v(" "), (_vm.hasFilterRow) ? _c('tr', [(_vm.lineNumbers) ? _c('th') : _vm._e(), _vm._v(" "), _vm._l((_vm.columns), function(column, index) {
-    return (!column.hidden) ? _c('th', {
+  }), _vm._v(" "), _vm._t("thead-tr")], 2), _vm._v(" "), (_vm.hasFilterRow) ? _c('tr', [(_vm.lineNumbers) ? _c('td') : _vm._e(), _vm._v(" "), _vm._l((_vm.columns), function(column, index) {
+    return (!column.hidden) ? _c('td', {
       key: index
     }, [(column.filterable) ? _c('div', {
       class: _vm.getHeaderClasses(column, index)
@@ -14972,7 +14967,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }, [_vm._v(_vm._s(option.text))])
     })], 2) : _vm._e()]) : _vm._e()]) : _vm._e()
-  })], 2) : _vm._e()]), _vm._v(" "), _c('tbody', [_vm._l((_vm.paginated), function(row, index) {
+  })], 2) : _vm._e(), _vm._v(" "), _vm._l((_vm.paginated), function(row, index) {
     return _c('tr', {
       key: index,
       class: _vm.getRowStyleClass(row),
@@ -14981,7 +14976,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.click(row, index)
         }
       }
-    }, [(_vm.lineNumbers) ? _c('th', {
+    }, [(_vm.lineNumbers) ? _c('td', {
       staticClass: "line-numbers"
     }, [_vm._v(_vm._s(_vm.getCurrentIndex(index)))]) : _vm._e(), _vm._v(" "), _vm._t("table-row-before", null, {
       row: row,
@@ -15052,7 +15047,7 @@ var content = __webpack_require__(130);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(85)("1587db6c", content, false, {});
+var update = __webpack_require__(85)("219bb374", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -15078,7 +15073,7 @@ var content = __webpack_require__(131);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(85)("7993fc22", content, false, {});
+var update = __webpack_require__(85)("4dfb852a", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags

@@ -17,13 +17,13 @@
       </label>
     </div>
     <div class="pagination-controls pull-right">
-      <a href="javascript:undefined" class="page-btn"  :class="{ disabled: !prevIsPossible }"
+      <a href="javascript:undefined" class="page-btn"  :class="{ disabled: !prevIsPossible }" :aria-disabled="!prevIsPossible"
          @click.prevent.stop="previousPage" tabindex="0">
         <span class="chevron" v-bind:class="{ 'left': !rtl, 'right': rtl }"></span>
         <span>{{prevText}}</span>
       </a>
       <div class="info">{{paginatedInfo}}</div>
-      <a href="javascript:undefined" class="page-btn"
+      <a href="javascript:undefined" class="page-btn" :aria-disabled="!nextIsPossible"
          :class="{ disabled: !nextIsPossible }" @click.prevent.stop="nextPage" tabindex="0">
         <span>{{nextText}}</span>
         <span class="chevron" v-bind:class="{ 'right': !rtl, 'left': rtl }"></span>
