@@ -41,7 +41,7 @@
                   @click="sort(index)"
                   :class="getHeaderClasses(column, index)"
                   :style="{width: column.width ? column.width : 'auto'}"
-                  v-if="!column.hidden">
+                  v-if="!column.hidden" :id="'column_' + column.label">
                 <slot name="table-column" :column="column">
                   <span>{{column.label}}</span>
                 </slot>
@@ -60,6 +60,7 @@
                   :class="getHeaderClasses(column, index)">
                   <input v-if="!column.filterDropdown"
                     type="text"
+                    :aria-labelledby="'column_' + column.label"
                     class=""
                     :placeholder="getPlaceholder(column)"
                     :value="columnFilters[column.field]"
@@ -68,7 +69,7 @@
                   <!-- options are a list of primitives -->
                   <select v-if="column.filterDropdown && typeof(column.filterOptions[0]) !== 'object'"
                     class=""
-                    :aria-label="column.label"
+                    :aria-labelledby="'column_' + column.label"
                     :value="columnFilters[column.field]"
                     v-on:change="updateFilters(column, $event.target.value)">
                       <option value="" key="-1">{{ getPlaceholder(column) }}</option>
@@ -83,7 +84,7 @@
                   <!-- options are a list of objects with text and value -->
                   <select v-if="column.filterDropdown && typeof(column.filterOptions[0]) === 'object'"
                     class=""
-                    :aria-label="column.label"
+                    :aria-labelledby="'column_' + column.label"
                     :value="columnFilters[column.field]"
                     v-on:change="updateFilters(column, $event.target.value)">
                     <option value="" key="-1">{{ getPlaceholder(column) }}</option>
