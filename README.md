@@ -75,8 +75,8 @@ export default {
           label: 'Created On',
           field: 'createdAt',
           type: 'date',
-          inputFormat: 'YYYYMMDD',
-          outputFormat: 'MMM Do YY',
+          inputFormat: 'yyyyMMdd',
+          outputFormat: 'MMM Do yy',
         },
         {
           label: 'Percent',
@@ -533,12 +533,12 @@ methods: {
     <tr>
       <td>inputFormat <strong>(if type is date)</strong></td>
       <td>provide the format to parse date string</td>
-      <td>String eg: <code>'YYYYMMDD' //where date strings are '20170530'</code></td>
+      <td>String eg: <code>'yyyyMMdd' //where date strings are '20170530'</code></td>
     </tr>
     <tr>
       <td>outputFormat <strong>(if type is date)</strong></td>
       <td>provide the format for output date</td>
-      <td>String eg: <code>'MMM Do YY' //where date will be output like 'May 30th 17'</code></td>
+      <td>String eg: <code>'MMM Do yy' //where date will be output like 'May 30th 17'</code></td>
     </tr>
     <tr>
       <td>sortable (optional)</td>
