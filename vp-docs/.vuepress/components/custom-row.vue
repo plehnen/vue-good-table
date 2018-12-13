@@ -35,8 +35,8 @@ export default {
           label: 'Created On',
           field: 'createdAt',
           type: 'date',
-          dateInputFormat: 'YYYY-MM-DD',
-          dateOutputFormat: 'MMM Do YY',
+          dateInputFormat: 'yyyy-MM-dd',
+          dateOutputFormat: 'MMM Do yy',
         },
         {
           label: 'Percent',

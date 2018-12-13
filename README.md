@@ -160,8 +160,8 @@ export default {
           label: 'Created On',
           field: 'createdAt',
           type: 'date',
-          dateInputFormat: 'YYYY-MM-DD',
-          dateOutputFormat: 'MMM Do YY',
+          dateInputFormat: 'yyyy-MM-dd',
+          dateOutputFormat: 'MMM Do yy',
         },
         {
           label: 'Percent',
@@ -679,8 +679,8 @@ columns: [
     label: 'joined On',
     field: 'createdAt',
     type: 'date',
-    dateInputFormat: 'YYYY-MM-DD', // expects 2018-03-16
-    dateOutputFormat: 'MMM Do YYYY', // outputs Mar 16th 2018
+    dateInputFormat: 'yyyy-MM-dd', // expects 2018-03-16
+    dateOutputFormat: 'MMM Do yyyy', // outputs Mar 16th 2018
   },
   // ...
 ]
