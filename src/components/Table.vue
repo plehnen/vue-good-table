@@ -41,7 +41,7 @@
                   @click="sort(index)"
                   :class="getHeaderClasses(column, index)"
                   :style="{width: column.width ? column.width : 'auto'}"
-                  v-if="!column.hidden" :id="'column_' + column.label">
+                  v-if="!column.hidden">
                 <slot name="table-column" :column="column">
                   <span>{{column.label}}</span>
                 </slot>
@@ -60,7 +60,7 @@
                   :class="getHeaderClasses(column, index)">
                   <input v-if="!column.filterDropdown"
                     type="text"
-                    :aria-labelledby="'column_' + column.label"
+                    :aria-label="getPlaceholder(column)"
                     class=""
                     :placeholder="getPlaceholder(column)"
                     :value="columnFilters[column.field]"
@@ -69,7 +69,7 @@
                   <!-- options are a list of primitives -->
                   <select v-if="column.filterDropdown && typeof(column.filterOptions[0]) !== 'object'"
                     class=""
-                    :aria-labelledby="'column_' + column.label"
+                    :aria-label="getPlaceholder(column)"
                     :value="columnFilters[column.field]"
                     v-on:change="updateFilters(column, $event.target.value)">
                       <option value="" key="-1">{{ getPlaceholder(column) }}</option>
@@ -84,7 +84,7 @@
                   <!-- options are a list of objects with text and value -->
                   <select v-if="column.filterDropdown && typeof(column.filterOptions[0]) === 'object'"
                     class=""
-                    :aria-labelledby="'column_' + column.label"
+                    :aria-label="getPlaceholder(column)"
                     :value="columnFilters[column.field]"
                     v-on:change="updateFilters(column, $event.target.value)">
                     <option value="" key="-1">{{ getPlaceholder(column) }}</option>
@@ -185,7 +185,7 @@
       searchTrigger: {default: null},
       externalSearchQuery: {default: null},
       globalSearchFn: {type: Function, default: null},
-      
+
       // text options
       globalSearchPlaceholder: {default: 'Search Table'},
       nextText: {default: 'Next'},
@@ -284,7 +284,7 @@
         let value = this.collect(obj, column.field);
         if (value === undefined) return '';
 
-        // if user has supplied custom formatter, 
+        // if user has supplied custom formatter,
         // use that here
         if (column.formatFn && typeof column.formatFn === 'function') {
           return column.formatFn(value);
@@ -398,9 +398,9 @@
 
       populateInitialFilters() {
         for (const col of this.columns) {
-          // lets see if there are initial 
+          // lets see if there are initial
           // filters supplied by user
-          if(typeof(col.filterValue) !== 'undefined' 
+          if(typeof(col.filterValue) !== 'undefined'
             && col.filterValue !== null) {
             this.updateFilters(col, col.filterValue);
             this.$set(col, 'filterValue', undefined);
